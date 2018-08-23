@@ -7,7 +7,7 @@ from scipy.interpolate import spline
 
 
 # kernel_num = str(64) #卷积核个数
-Net_Name = "SCSF_C768F10" #
+Net_Name = "SCSF_C320F10" #
 is_acc=0    #为1时为loss，为0时为acc
 is_loss =1  #为1时为loss，为0时为acc
 
@@ -23,13 +23,13 @@ def plot_micro(type=0):
     # mpl.style.use('seaborn-bright')
     # cmap=plt.cm.Spectral
     # Color_microTrain=['yellow','red','blue','cyan','gray','black']
-    K_color={"300":"black",\
+    K_color={"144":"black",\
     "bt_0":"b",\
-    "bt_5":"g",\
-    "bt_10":"r",\
+    "bt_1":"g",\
+    "bt_5":"r",\
     "mt_0":"c",\
-    "mt_5":"m",\
-    "mt_10":"y"}
+    "mt_1":"m",\
+    "mt_5":"y"}
     # K_color={"0":cmap(0.0),"10":cmap(0.2),"20":cmap(0.4),"25":cmap(0.6),"35":cmap(0.8),"40":cmap(1.)}
     # K_color={"0":"xkcd:bronze","10":"xkcd:pinky red","20":"xkcd:dull red","25":"xkcd:marine","35":"xkcd:bluish","40":"xkcd:pale teal"}
     # k_microTrain=10
@@ -57,7 +57,7 @@ def Acc_Plot(indicator,loc,micro_epochs,color):
     test_y = test1
     max_index=np.argmax(test_y) # find the max point of test sets
 
-    if micro_epochs=="300":
+    if micro_epochs=="144":
         label = ("all_train")
     # elif micro_epochs=="-1":
     #     label ="00mT"
@@ -72,8 +72,9 @@ def Acc_Plot(indicator,loc,micro_epochs,color):
     print(label_info)
     
     plt.plot(plt_x, test_y, label=label, color=color, linewidth=1,linestyle="-")
-    ticks=np.arange(min(plt_x),max(plt_x)+2, 10)
+    ticks=np.arange(min(plt_x),max(plt_x)+2, 5)
     plt.xticks(ticks)
+    plt.grid(True)
     # plt.plot(max_index,test_y[max_index], color=color, marker='o')
 
 '''
@@ -104,5 +105,5 @@ if __name__ == '__main__':
     # plt.show()
     
     plot_micro(is_acc)
-    plt.grid(True)
+    
     # plt.show()
