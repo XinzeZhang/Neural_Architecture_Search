@@ -419,7 +419,7 @@ def conv_fixed(L_W, R_W, args, model, device, train_loader, test_loader, lr, tra
     model.load_state_dict(torch.load(dir_model_state))
 
     # load the pretrained result sets
-    dir_result_npz = "../Result_npz_mT/"+args.model_name + \
+    dir_result_npz = "../Result_npz/"+args.model_name + \
         "/Acc_"+str(args.total_epochs)+".npz"
     Acc_results = np.load(dir_result_npz)
     test_results, train_results = Acc_results["arr_0"], Acc_results["arr_1"]
@@ -478,7 +478,7 @@ def weight_fixed(L_W, R_W, args, model, device, train_loader, test_loader, lr, t
     model.load_state_dict(torch.load(dir_model_state))
 
     # load the pretrained result sets
-    dir_result_npz = "../Result_npz_mT/"+model_name + \
+    dir_result_npz = "../Result_npz/"+model_name + \
         "/Acc_"+str(args.total_epochs)+".npz"
     Acc_results = np.load(dir_result_npz)
     test_results, train_results = Acc_results["arr_0"], Acc_results["arr_1"]
