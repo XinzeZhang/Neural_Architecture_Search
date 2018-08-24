@@ -22,7 +22,7 @@ parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                     help='input batch size for testing (default: 1000)')
 parser.add_argument('--total_epochs', type=int, default=105, metavar='N',
                     help='number of epochs to train (default: 300)')
-parser.add_argument('--k_allTrain_epochs', type=int, default=0, metavar='N',
+parser.add_argument('--k', type=int, default=0, metavar='N',
                     help='number of epochs to train (default: 300)')
 parser.add_argument('--conv1_size', type=int, default=64, metavar='N',
                     help='kernels of first convolutional layer (default: 160)')
