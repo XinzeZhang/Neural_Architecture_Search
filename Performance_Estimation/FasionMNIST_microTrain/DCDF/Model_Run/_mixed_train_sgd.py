@@ -72,7 +72,7 @@ def all_train(args, model, device):
                  test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
     # model_name = str(model.__class__.__name__)+"_C"+str(args.n_kernel)+"F10"
-    # k_model_name = model_name+"_"+str(args.k_allTrain_epochs)
+    # k_model_name = model_name+"_"+str(args.k)
     # dir_model_state = "../Model_State/"+model_name+"/"+k_model_name+".pkl"
     # torch.save(model.state_dict(), dir_model_state)
 
@@ -120,7 +120,7 @@ def micro_train(args, model, device):
     # Initialize timer
     time_tr_start = time.time()
     # lr windows 1
-    if args.k_allTrain_epochs < w1:
+    if args.k < w1:
         conv_fixed(time_tr_start, 0, w1, args, model, device, train_loader,
                    test_loader, init_lr, train_acc_array, test_acc_array)
         train_window(time_tr_start, w1, w12a, args, model, device, train_loader,
@@ -137,7 +137,7 @@ def micro_train(args, model, device):
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
     # lr windows 2
-    if w1 <= args.k_allTrain_epochs < w12a:
+    if w1 <= args.k < w12a:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         conv_fixed(time_tr_start, w1, w12a, args, model, device, train_loader,
@@ -153,7 +153,7 @@ def micro_train(args, model, device):
         train_window(time_tr_start, w123c, w123d, args, model, device, train_loader,
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
-    if w12a <= args.k_allTrain_epochs < w12b:
+    if w12a <= args.k < w12b:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -170,7 +170,7 @@ def micro_train(args, model, device):
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
     # lr windows 3
-    if w12b <= args.k_allTrain_epochs < w123a:
+    if w12b <= args.k < w123a:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -186,7 +186,7 @@ def micro_train(args, model, device):
         train_window(time_tr_start, w123c, w123d, args, model, device, train_loader,
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
-    if w123a <= args.k_allTrain_epochs < w123b:
+    if w123a <= args.k < w123b:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -202,7 +202,7 @@ def micro_train(args, model, device):
         train_window(time_tr_start, w123c, w123d, args, model, device, train_loader,
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
-    if w123b <= args.k_allTrain_epochs < w123c:
+    if w123b <= args.k < w123c:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -218,7 +218,7 @@ def micro_train(args, model, device):
         train_window(time_tr_start, w123c, w123d, args, model, device, train_loader,
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
-    if w123c <= args.k_allTrain_epochs < w123d:
+    if w123c <= args.k < w123d:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -235,7 +235,7 @@ def micro_train(args, model, device):
                    test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
     # dir_model_state = "../Model_State/"+str(model.__class__.__name__)+"_C"+str(args.n_kernel)+"F10"+"/"+str(
-    #     model.__class__.__name__)+"_C"+str(args.n_kernel)+"F10"+"_"+str(args.k_allTrain_epochs)+".pkl"
+    #     model.__class__.__name__)+"_C"+str(args.n_kernel)+"F10"+"_"+str(args.k)+".pkl"
     # torch.save(model.state_dict(), dir_model_state)
 
     return train_acc_array, test_acc_array
@@ -283,7 +283,7 @@ def bias_train(args, model, device):
     # Initialize timer
     time_tr_start = time.time()
     # lr windows 1
-    if args.k_allTrain_epochs < w1:
+    if args.k < w1:
         weight_fixed(time_tr_start, 0, w1, args, model, device, train_loader,
                      test_loader, init_lr, train_acc_array, test_acc_array)
         train_window(time_tr_start, w1, w12a, args, model, device, train_loader,
@@ -300,7 +300,7 @@ def bias_train(args, model, device):
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
     # lr windows 2
-    if w1 <= args.k_allTrain_epochs < w12a:
+    if w1 <= args.k < w12a:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         weight_fixed(time_tr_start, w1, w12a, args, model, device, train_loader,
@@ -316,7 +316,7 @@ def bias_train(args, model, device):
         train_window(time_tr_start, w123c, w123d, args, model, device, train_loader,
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
-    if w12a <= args.k_allTrain_epochs < w12b:
+    if w12a <= args.k < w12b:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -333,7 +333,7 @@ def bias_train(args, model, device):
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
     # lr windows 3
-    if w12b <= args.k_allTrain_epochs < w123a:
+    if w12b <= args.k < w123a:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -349,7 +349,7 @@ def bias_train(args, model, device):
         train_window(time_tr_start, w123c, w123d, args, model, device, train_loader,
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
-    if w123a <= args.k_allTrain_epochs < w123b:
+    if w123a <= args.k < w123b:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -365,7 +365,7 @@ def bias_train(args, model, device):
         train_window(time_tr_start, w123c, w123d, args, model, device, train_loader,
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
-    if w123b <= args.k_allTrain_epochs < w123c:
+    if w123b <= args.k < w123c:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -381,7 +381,7 @@ def bias_train(args, model, device):
         train_window(time_tr_start, w123c, w123d, args, model, device, train_loader,
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
-    if w123c <= args.k_allTrain_epochs < w123d:
+    if w123c <= args.k < w123d:
         # train_window(time_tr_start,0, w1, args, model, device, train_loader,
         #              test_loader, init_lr, train_acc_array, test_acc_array)
         # train_window(time_tr_start,w1, w12a, args, model, device, train_loader,
@@ -398,7 +398,7 @@ def bias_train(args, model, device):
                      test_loader, init_lr*0.001, train_acc_array, test_acc_array)
 
     # dir_model_state = "../Model_State/"+str(model.__class__.__name__)+"_C"+str(args.n_kernel)+"F10"+"/"+str(
-    #     model.__class__.__name__)+"_C"+str(args.n_kernel)+"F10"+"_"+str(args.k_allTrain_epochs)+".pkl"
+    #     model.__class__.__name__)+"_C"+str(args.n_kernel)+"F10"+"_"+str(args.k)+".pkl"
     # torch.save(model.state_dict(), dir_model_state)
 
     return train_acc_array, test_acc_array
@@ -414,7 +414,7 @@ def conv_fixed( time_start, L_W, R_W, args, model, device, train_loader, test_lo
     # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # load the pretrained model state
 
-    k_model_name = args.model_name+"_"+str(args.k_allTrain_epochs)
+    k_model_name = args.model_name+"_"+str(args.k)
     dir_model_state = "../Model_State/"+args.model_name+"/"+k_model_name+".pkl"
     model.load_state_dict(torch.load(dir_model_state))
 
@@ -424,11 +424,11 @@ def conv_fixed( time_start, L_W, R_W, args, model, device, train_loader, test_lo
     Acc_results = np.load(dir_result_npz)
     test_results, train_results = Acc_results["arr_0"], Acc_results["arr_1"]
 
-    pre_test_acc = test_results[:args.k_allTrain_epochs]
+    pre_test_acc = test_results[:args.k]
     for acc in pre_test_acc:
         test_acc_array.append(acc)
 
-    pre_train_acc = train_results[:args.k_allTrain_epochs]
+    pre_train_acc = train_results[:args.k]
     for acc in pre_train_acc:
         train_acc_array.append(acc)
 
@@ -450,7 +450,7 @@ def conv_fixed( time_start, L_W, R_W, args, model, device, train_loader, test_lo
     optimizer = optim.SGD(
         filter(lambda p: p.requires_grad, model.parameters()), lr=lr, weight_decay=0.0005, momentum=0.9)
     print("---------> fixed the convolutional layer <---------")
-    for epoch in range(args.k_allTrain_epochs + 1, R_W + 1):
+    for epoch in range(args.k + 1, R_W + 1):
         _train_epoch(epoch, args, model, device, train_loader, optimizer)
         train_acc = _train_acc(epoch, model, device, train_loader)
         train_acc_array.append(train_acc)
@@ -468,7 +468,7 @@ def weight_fixed(time_start, L_W, R_W, args, model, device, train_loader, test_l
     # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     # load the pretrained model state
 
-    k_model_name = args.model_name+"_"+str(args.k_allTrain_epochs)
+    k_model_name = args.model_name+"_"+str(args.k)
     dir_model_state = "../Model_State/"+args.model_name+"/"+k_model_name+".pkl"
     model.load_state_dict(torch.load(dir_model_state))
 
@@ -478,16 +478,16 @@ def weight_fixed(time_start, L_W, R_W, args, model, device, train_loader, test_l
     Acc_results = np.load(dir_result_npz)
     test_results, train_results = Acc_results["arr_0"], Acc_results["arr_1"]
 
-    pre_test_acc = test_results[:args.k_allTrain_epochs]
+    pre_test_acc = test_results[:args.k]
     for acc in pre_test_acc:
         test_acc_array.append(acc)
 
-    pre_train_acc = train_results[:args.k_allTrain_epochs]
+    pre_train_acc = train_results[:args.k]
     for acc in pre_train_acc:
         train_acc_array.append(acc)
 
     # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    # for epoch in range(L_W+1, args.k_allTrain_epochs + 1):
+    # for epoch in range(L_W+1, args.k + 1):
     #     _train_epoch(epoch, args, model, device, train_loader, optimizer)
     #     train_acc = _train_acc(epoch, model, device, train_loader)
     #     train_acc_array.append(train_acc)
@@ -511,7 +511,7 @@ def weight_fixed(time_start, L_W, R_W, args, model, device, train_loader, test_l
     optimizer = optim.SGD(
         filter(lambda p: p.requires_grad, model.parameters()), lr=lr, weight_decay=0.0005, momentum=0.9)
     print("---------> fixed the weight of all layers <---------")
-    for epoch in range(args.k_allTrain_epochs + 1, R_W + 1):
+    for epoch in range(args.k + 1, R_W + 1):
         _train_epoch(epoch, args, model, device, train_loader, optimizer)
         train_acc = _train_acc(epoch, model, device, train_loader)
         train_acc_array.append(train_acc)
@@ -606,7 +606,7 @@ def _test_epoch(time_start,epoch, model, device, data_loader, args):
                                                                                               100. * correct / len(data_loader.dataset)))
     print('%s (%d %.2f%%) ' % (timeSince(time_start, epoch / args.total_epochs), epoch, epoch / args.total_epochs * 100))
     print('-----------------------------------------------------------------')
-    with open("../Result_npz/"+args.model_name+"/TestLog_"+str(args.k_allTrain_epochs)+".txt", "a+") as f:
+    with open("../Result_npz/"+args.model_name+"/TestLog_"+str(args.k)+".txt", "a+") as f:
         print('Train Epoch: {}, Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.3f}%)'.format(epoch,
                                                                                                   test_loss, correct, len(
                                                                                                       data_loader.dataset),
