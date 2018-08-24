@@ -94,9 +94,9 @@ if __name__ == '__main__':
         os.mkdir(dir_result)
         
     time_start=time.time()
-    if args.k_allTrain_epochs == args.total_epochs:
+    if args.k == args.total_epochs:
         train_acc_array,test_acc_array=all_train(args,aT_model,device)
-    elif 0<=args.k_allTrain_epochs < args.total_epochs:
+    elif 0<=args.k < args.total_epochs:
         # train_acc_array,test_acc_array=micro_train(args,aT_model,device)
         train_acc_array,test_acc_array=bias_train(args,aT_model,device)
     else :
@@ -107,8 +107,8 @@ if __name__ == '__main__':
     log_dirs = "../Result_npz/"+model_name
     
     with open(log_dirs+"/Time_Log.txt", "a+") as f:
-        print("%d\t%s" % (args.k_allTrain_epochs,asMinutesUnit(time.time() - time_start)) , file=f)
+        print("%d\t%s" % (args.k,asMinutesUnit(time.time() - time_start)) , file=f)
     # np.savez(dirs+"/acc"+str(int(microtrain_steps/display_step))+".npz", test_acc_array, train_acc_array)
-    np.savez(log_dirs+"/Acc_bT_"+str(args.k_allTrain_epochs)+".npz", test_acc_array, train_acc_array)
+    np.savez(log_dirs+"/Acc_bT_"+str(args.k)+".npz", test_acc_array, train_acc_array)
 
-    os.rename("../Result_npz/"+args.model_name+"/TestLog_"+str(args.k_allTrain_epochs)+".txt","../Result_npz/"+args.model_name+"/TestLog_bT_"+str(args.k_allTrain_epochs)+".txt")
+    os.rename("../Result_npz/"+args.model_name+"/TestLog_"+str(args.k)+".txt","../Result_npz/"+args.model_name+"/TestLog_bT_"+str(args.k)+".txt")
