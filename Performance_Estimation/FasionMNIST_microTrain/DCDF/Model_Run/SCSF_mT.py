@@ -22,7 +22,7 @@ parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                     help='input batch size for testing (default: 1000)')
 parser.add_argument('--total_epochs', type=int, default=105, metavar='N',
                     help='number of epochs to train (default: 300)')
-parser.add_argument('--k_allTrain_epochs', type=int, default=105, metavar='N',
+parser.add_argument('--k_allTrain_epochs', type=int, default=0, metavar='N',
                     help='number of epochs to train (default: 300)')
 parser.add_argument('--conv1_size', type=int, default=64, metavar='N',
                     help='kernels of first convolutional layer (default: 160)')
@@ -110,3 +110,5 @@ if __name__ == '__main__':
         print("%d\t%s" % (args.k_allTrain_epochs,asMinutesUnit(time.time() - time_start)) , file=f)
     # np.savez(dirs+"/acc"+str(int(microtrain_steps/display_step))+".npz", test_acc_array, train_acc_array)
     np.savez(log_dirs+"/Acc_mT_"+str(args.k_allTrain_epochs)+".npz", test_acc_array, train_acc_array)
+
+    os.rename("../Result_npz/"+args.model_name+"/TestLog_"+str(args.k_allTrain_epochs)+".txt","../Result_npz/"+args.model_name+"/TestLog_mT_"+str(args.k_allTrain_epochs)+".txt")
