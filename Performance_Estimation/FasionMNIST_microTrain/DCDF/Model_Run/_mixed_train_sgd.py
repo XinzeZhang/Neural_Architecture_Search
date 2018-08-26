@@ -606,7 +606,7 @@ def _test_epoch(time_start,epoch, model, device, data_loader, args):
                                                                                               100. * correct / len(data_loader.dataset)))
     print('%s (%d %.2f%%) ' % (timeSince(time_start, epoch / args.total_epochs), epoch, epoch / args.total_epochs * 100))
     print('-----------------------------------------------------------------')
-    with open("../Result_npz/"+args.model_name+"/TestLog_"+str(args.k)+".txt", "a+") as f:
+    with open("../Result_npz/"+args.model_name+"/TestLog_"+str(args.pattern)+"_"+str(args.k)+".txt", "a+") as f:
         print('Train Epoch: {}, Test set: Average loss: {:.4f}, Accuracy: {}/{} ({:.3f}%)'.format(epoch,
                                                                                                   test_loss, correct, len(
                                                                                                       data_loader.dataset),

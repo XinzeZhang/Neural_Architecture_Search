@@ -63,7 +63,10 @@ parser.add_argument('--gpu', type=int, default=0, metavar='C',
                     help='random seed (default: 0)')
 # ------------------------------------------------------------------------------
 parser.add_argument('--model_name', type=str, default="", metavar='S',
-                    help='model name')                    
+                    help='model name')
+# ------------------------------------------------------------------------------
+parser.add_argument('--pattern', type=str, default="mT", metavar='S',
+                    help='training pattern')
 # ==============================================================================
 
 if __name__ == '__main__':
@@ -97,7 +100,13 @@ if __name__ == '__main__':
     if args.k == args.total_epochs:
         train_acc_array,test_acc_array=all_train(args,aT_model,device)
     elif 0<=args.k < args.total_epochs:
-        train_acc_array,test_acc_array=micro_train(args,aT_model,device)
+        if args.pattern == "mt":
+            train_acc_array,test_acc_array=micro_train(args,aT_model,device)
+        elif args.pattern == "bt":
+            train_acc_array,test_acc_array=bias_train(args,aT_model,device)
+        else:
+            print("Error ! Please set training pattern: mt or bt")
+            exit()
         # train_acc_array,test_acc_array=bias_train(args,aT_model,device)
     else :
         print("Error ! please make sure k_allTrain is smaller than totals!")
@@ -107,8 +116,6 @@ if __name__ == '__main__':
     log_dirs = "../Result_npz/"+model_name
     
     with open(log_dirs+"/Time_Log.txt", "a+") as f:
-        print("%d\t%s" % (args.k,asMinutesUnit(time.time() - time_start)) , file=f)
+        print("%d\t%s" % (args.pattern+args.k,asMinutesUnit(time.time() - time_start)) , file=f)
     # np.savez(dirs+"/acc"+str(int(microtrain_steps/display_step))+".npz", test_acc_array, train_acc_array)
     np.savez(log_dirs+"/Acc_mT_"+str(args.k)+".npz", test_acc_array, train_acc_array)
-
-    os.rename("../Result_npz/"+args.model_name+"/TestLog_"+str(args.k)+".txt","../Result_npz/"+args.model_name+"/TestLog_mT_"+str(args.k)+".txt")
