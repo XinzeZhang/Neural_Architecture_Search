@@ -116,6 +116,6 @@ if __name__ == '__main__':
     log_dirs = "../Result_npz/"+model_name
     
     with open(log_dirs+"/Time_Log.txt", "a+") as f:
-        print("%d\t%s" % (args.pattern+args.k,asMinutesUnit(time.time() - time_start)) , file=f)
+        print("%d\t%s" % (args.pattern+str(args.k),asMinutesUnit(time.time() - time_start)) , file=f)
     # np.savez(dirs+"/acc"+str(int(microtrain_steps/display_step))+".npz", test_acc_array, train_acc_array)
     np.savez(log_dirs+"/Acc_mT_"+str(args.k)+".npz", test_acc_array, train_acc_array)
