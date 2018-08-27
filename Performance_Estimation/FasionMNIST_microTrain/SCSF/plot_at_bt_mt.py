@@ -7,7 +7,7 @@ from scipy.interpolate import spline
 
 
 # kernel_num = str(64) #卷积核个数
-Net_Name = "SCSF_C320F10" #
+Net_Name = "C320F10" #
 is_acc=0    #为1时为loss，为0时为acc
 is_loss =1  #为1时为loss，为0时为acc
 
@@ -53,16 +53,28 @@ def Acc_Plot(indicator,loc,micro_epochs,color):
     # test1,train1 = load_data("./Result_npz/"+kernel_num+"/"+indicator+str(micro_epochs)+".npz")
     test1,train1 = load_data("./Result_npz/"+Net_Name+"/Acc_"+str(micro_epochs)+".npz")
     size = np.size(test1)
-    plt_x = np.arange(size)
+    plt_x = np.arange(1,size+1)
     test_y = test1
     max_index=np.argmax(test_y) # find the max point of test sets
 
     if micro_epochs=="144":
-        label = ("all_train")
+        label = ("full training")
+    if micro_epochs=="bt_0":
+        label = ("0 partial training")
+    if micro_epochs=="bt_1":
+        label = ("1 partial training")
+    if micro_epochs=="bt_5":
+        label = ("5 partial training")
+    if micro_epochs=="mt_0":
+        label = ("0 micro training")
+    if micro_epochs=="mt_1":
+        label = ("1 micro training")     
+    if micro_epochs=="mt_5":
+        label = ("5 micro training")
     # elif micro_epochs=="-1":
     #     label ="00mT"
-    else:
-        label = str(micro_epochs)
+    # else:
+    #     label = str(micro_epochs)
 
     # show_max='['+str(max_index)+',%.3f]' %(100.0 * test_y[max_index])
     # plt.annotate(show_max,xytext=(max_index,test_y[max_index]),xy=(max_index,test_y[max_index]),fontsize=10, color=color)
@@ -72,7 +84,7 @@ def Acc_Plot(indicator,loc,micro_epochs,color):
     print(label_info)
     
     plt.plot(plt_x, test_y, label=label, color=color, linewidth=1,linestyle="-")
-    ticks=np.arange(min(plt_x),max(plt_x)+2, 5)
+    ticks=np.arange(min(plt_x),max(plt_x)+2, 4)
     plt.xticks(ticks)
     plt.grid(True)
     # plt.plot(max_index,test_y[max_index], color=color, marker='o')
